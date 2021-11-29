@@ -1,0 +1,26 @@
+.vscode/
+
+temp*
+tmp*
+test*
+
+result
+Rn_6.0
+temp
+tmp
+
+# R
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# python
+.pytest_cache
+__pycache__
+
+# rust
+learn_rust/*/target
+
+# perl
+.vstags
