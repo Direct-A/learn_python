@@ -1,0 +1,15 @@
+{
+  "python.pythonPath": "/home/syc/miniconda3/bin/python",
+  "python.linting.enabled": true,
+  "python.testing.pytestArgs": [
+    "pytest"
+  ],
+  "python.testing.unittestEnabled": false,
+  "python.testing.nosetestsEnabled": false,
+  "python.testing.pytestEnabled": true,
+  // 解决import boo语句下就会出现红色波浪线，提示unable to import boo。
+  // "python.linting.pylintArgs": [
+  //     "--init-hook",
+  //     "import sys; sys.path.insert(0, './modules')"
+  // ]
+}

@@ -1,0 +1,44 @@
+---
+groups:
+  - HY1-input_L3
+  - HY1-IP_L4
+  - HY2-input_L1
+  - HY2-IP_L3
+  - HY3-input_L1
+  - HY3-IP_L3
+  - S1-input_L1
+  - S1-IP_L1
+  - S4-input_L1
+  - S4-IP_L4
+  - S5-IP_L1
+  - S5-input_L2
+  - Z1-input_L1
+  - Z1-IP_L1
+  - Z2-input_L1
+  - Z2-IP_L1
+  - Z3-input_L1
+  - Z3-IP_L3
+  - Z3-IP_L2
+
+single_cut_group:
+  - HY1-input_L3
+  - HY2-input_L1
+  - HY3-input_L1
+  - S4-input_L1
+  - S5-input_L2
+  - Z2-input_L1
+  - Z3-input_L1
+
+double_cut_group:
+  - HY1-IP_L4
+  - HY2-IP_L3
+  - HY3-IP_L3
+  - S1-IP_L1
+  - S4-IP_L4
+  - S5-IP_L1
+  - Z1-IP_L1
+  - Z2-IP_L1
+  - Z3-IP_L2
+  - Z3-IP_L3
+  - S1-input_L1
+  - Z1-input_L1

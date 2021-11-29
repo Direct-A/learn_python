@@ -1,0 +1,96 @@
+# -*- coding: utf-8 -*-
+# Author: sYc
+# Date: 2021-04-14 12:48:05
+# Version: 0.1
+# Description:
+
+
+configfile: "./config.yaml"
+
+
+wildcard_constraints:
+    scut_group="|".join([re.escape(x) for x in config["single_cut_group"]]),
+    dcut_group="|".join([re.escape(x) for x in config["double_cut_group"]]),
+
+
+rule all:
+    input:
+        ###################################
+        # single_cutadapt
+        ## input
+        expand(
+            "raw_data/{scut_group}_1.fq.gz",
+            scut_group=config["single_cut_group"],
+        ),
+        expand(
+            "raw_data/{scut_group}_2.fq.gz",
+            scut_group=config["single_cut_group"],
+        ),
+        ## output
+        expand(
+            "trimed/{scut_group}.qc.txt",
+            scut_group=config["single_cut_group"],
+        ),
+        ###################################
+        # double_cutadapt
+        ## input
+        expand(
+            "raw_data/{dcut_group}_1.fq.gz",
+            dcut_group=config["double_cut_group"],
+        ),
+        expand(
+            "raw_data/{dcut_group}_2.fq.gz",
+            dcut_group=config["double_cut_group"],
+        ),
+        ## output
+        expand(
+            "trimed/{dcut_group}.qc.txt",
+            dcut_group=config["double_cut_group"],
+        ),
+        ###################################
+        # feature_counts
+
+
+
+rule single_cutadapt:
+    # priority: 19
+    input:
+        ["raw_data/{scut_group}_1.fq.gz", "raw_data/{scut_group}_2.fq.gz"],
+    output:
+        qc="trimed/{scut_group}.qc.txt",
+    shell:
+        """
+        echo -n "{input[0]}\n{input[1]}" > {output.qc}
+        """
+
+
+rule double_cutadapt:
+    # priority: 18
+    input:
+        ["raw_data/{dcut_group}_1.fq.gz", "raw_data/{dcut_group}_2.fq.gz"],
+    output:
+        qc="trimed/{dcut_group}.qc.txt",
+    shell:
+        """
+        echo -n "{input[0]}\n{input[1]}" > {output.qc}
+        """
+
+rule feature_counts:
+    input:
+        sam="trimmed/{group}.bam",
+        annotation="",
+    output:
+        "",
+    log:
+        "logs/{sample}.log",
+    params:
+        threads="-T 16",
+        extra="-O --fracOverlap 0.2",
+    shell:
+        """
+        featureCounts -a annotation.gtf \
+            {params.threads} \
+            {params.extra} \
+            -o {output} \
+            {input}
+        """
